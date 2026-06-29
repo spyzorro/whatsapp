@@ -1,13 +1,22 @@
-# WhatsVoiceBubble GitHub Build Package
+# WhatsVoiceBubble
 
-المشروع داخل مجلد `WhatsVoiceBubble`.
+تطبيق أندرويد بفقاعة عائمة فوق واتساب لتحويل آخر ريكورد محفوظ إلى نص، مع زر فحص تحديث من GitHub Releases.
 
-GitHub Actions داخل `.github/workflows/build-apk.yml` وسيبني APK تلقائيًا.
+## Build APK
 
-- Push على `main` => APK كـ Artifact.
-- Tag يبدأ بـ `v` مثل `v3.0.0` => Release + APK.
+GitHub Actions يبني APK تلقائيًا مع كل push.
 
-زر التحديث داخل التطبيق يعتمد على آخر Release في GitHub.
-لو غيرت اسم الريبو، عدّل `GITHUB_REPO` داخل:
+بعد نجاح الـ Action، حمّل الـ APK من:
 
-`WhatsVoiceBubble/app/src/main/java/com/example/whatsvoicebubble/UpdateChecker.java`
+Actions → آخر Run → Artifacts → WhatsVoiceBubble-debug-apk
+
+## تحديث التطبيق
+
+1. زوّد `versionCode` و `versionName` في `app/build.gradle`.
+2. اعمل Tag مثل `v1.2.0`.
+3. GitHub Actions سينشئ Release ويرفع APK.
+4. داخل التطبيق اضغط زر فحص التحديث.
+
+## مهم
+
+الريكورد لازم يكون متحمّل فعلًا على الجهاز؛ التطبيق لا يستطيع تحميل ريكورد غير محفوظ من سيرفرات واتساب مباشرة.
