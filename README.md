@@ -1,22 +1,24 @@
-# WhatsVoiceBubble
+# Whats Voice Bubble v1.3.0
 
-تطبيق أندرويد بفقاعة عائمة فوق واتساب لتحويل آخر ريكورد محفوظ إلى نص، مع زر فحص تحديث من GitHub Releases.
+Android starter app for converting WhatsApp voice notes to text using a floating bubble.
 
-## Build APK
+## v1.3.0 changes
 
-GitHub Actions يبني APK تلقائيًا مع كل push.
+- Removed Accessibility Service to avoid Android restricted settings warnings for sideloaded APKs.
+- Bubble now runs manually/always without Accessibility.
+- Added multiple conversion routes:
+  - MediaStore Audio lookup.
+  - MediaStore Files lookup.
+  - SAF folder picker for WhatsApp Voice Notes.
+  - Manual audio file picker.
+  - Live microphone speech recognition without backend.
+  - Microphone recording fallback sent to backend.
+- GitHub update checker remains wired to `spyzorro/whatsapp`.
 
-بعد نجاح الـ Action، حمّل الـ APK من:
+## Build
 
-Actions → آخر Run → Artifacts → WhatsVoiceBubble-debug-apk
+Upload repo contents to the root of `spyzorro/whatsapp` and run GitHub Actions `Build APK`.
 
-## تحديث التطبيق
+## Backend
 
-1. زوّد `versionCode` و `versionName` في `app/build.gradle`.
-2. اعمل Tag مثل `v1.2.0`.
-3. GitHub Actions سينشئ Release ويرفع APK.
-4. داخل التطبيق اضغط زر فحص التحديث.
-
-## مهم
-
-الريكورد لازم يكون متحمّل فعلًا على الجهاز؛ التطبيق لا يستطيع تحميل ريكورد غير محفوظ من سيرفرات واتساب مباشرة.
+Run `backend/server.py` with `OPENAI_API_KEY` and set the `/transcribe` URL inside the app.
